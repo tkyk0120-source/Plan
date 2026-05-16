@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>プラン・料金｜結び処 凛</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --rose:      #c8405a;
+  --rose-lt:   #e8849a;
+  --blush:     #f5dde3;
+  --blush-lt:  #fdf4f6;
+  --mauve:     #b890b0;
+  --gold:      #c09050;
+  --gold-lt:   #e8d090;
+  --ink:       #2a1820;
+  --ink-mid:   #5a3848;
+  --cream:     #fdf8f4;
+  --cream-dk:  #f5ede6;
+  --white:     #ffffff;
+  /* プランカラー */
+  --ume:       #d4849a;
+  --take:      #c8405a;
+  --matsu:     #8a6090;
+  --free:      #a09060;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  font-family: 'Noto Sans JP', sans-serif;
+  color: var(--ink);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes float {
+  0%,100% { transform:translateY(0); }
+  50%      { transform:translateY(-7px); }
+}
+@keyframes pulse-ring {
+  0%   { transform:scale(1);   opacity:.5; }
+  100% { transform:scale(1.4); opacity:0; }
+}
+@keyframes shimmer {
+  0%   { background-position:-200% center; }
+  100% { background-position: 200% center; }
+}
+
+.reveal {
+  opacity:0; transform:translateY(22px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ══ HEADER ══ */
+.header {
+  background: var(--white);
+  border-bottom: 1px solid rgba(200,160,170,.2);
+  padding: 14px 24px;
+  text-align: center;
+  position: sticky; top:0; z-index:100;
+}
+.header-logo {
+  font-family: 'Noto Serif JP', serif;
+  font-size:14px; letter-spacing:.45em;
+  color:var(--ink); font-weight:300;
+}
+.header-logo span { color:var(--rose); }
+
+/* ══ HERO ══ */
+.hero {
+  background:
+    radial-gradient(ellipse at 80% 15%, rgba(200,120,140,.16) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 80%, rgba(184,144,176,.12) 0%, transparent 50%),
+    var(--cream);
+  padding: 52px 24px 44px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-circle {
+  position:absolute; border-radius:50%;
+  border:1px solid rgba(192,144,80,.15);
+  pointer-events:none;
+}
+.hc1 { width:400px;height:400px;top:-100px;right:-90px;border-width:.5px; }
+.hc2 { width:240px;height:240px;bottom:-70px;left:-60px; }
+
+.hero-logo {
+  width:70px; height:70px;
+  margin:0 auto 18px;
+  animation:float 5s ease-in-out infinite;
+}
+.hero-eyebrow {
+  font-size:9px; letter-spacing:.55em;
+  color:var(--gold); margin-bottom:10px;
+}
+.hero-title {
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(21px,5.5vw,30px);
+  font-weight:400; line-height:1.65; margin-bottom:10px;
+}
+.hero-title em { font-style:normal; color:var(--rose); }
+.hero-sub {
+  font-size:13px; color:var(--ink-mid);
+  line-height:2; margin-bottom:28px;
+}
+
+/* 装飾 */
+.ornament {
+  display:flex; align-items:center; gap:10px;
+  justify-content:center; margin:16px auto;
+}
+.ol { width:40px;height:.5px;background:linear-gradient(90deg,transparent,var(--gold)); }
+.ol.r { background:linear-gradient(90deg,var(--gold),transparent); }
+.od { width:4px;height:4px;background:var(--gold);transform:rotate(45deg);opacity:.7; }
+
+/* ══ セクション共通 ══ */
+.sec-eyebrow {
+  font-size:9px; letter-spacing:.55em; color:var(--gold);
+  text-align:center; margin-bottom:10px;
+}
+.sec-title {
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(19px,4.5vw,26px);
+  text-align:center; line-height:1.7; margin-bottom:14px;
+}
+.sec-title em { font-style:normal; color:var(--rose); }
+.sec-lead {
+  font-size:13px; color:var(--ink-mid);
+  text-align:center; line-height:2; margin-bottom:40px;
+}
+
+/* ══ 料金の考え方 ══ */
+.concept-sec {
+  padding:64px 24px;
+  background:var(--white);
+}
+.concept-inner { max-width:600px; margin:0 auto; }
+
+.concept-box {
+  background:linear-gradient(135deg,#fdf0f3,#f8e8f2);
+  border:1px solid rgba(200,120,140,.2);
+  border-radius:16px;
+  padding:32px 28px;
+  text-align:center;
+  margin-bottom:32px;
+}
+.concept-box p {
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(16px,4vw,20px);
+  color:var(--rose); line-height:2;
+}
+.concept-box small {
+  font-size:12px; color:var(--ink-mid); line-height:2;
+}
+
+.fee-structure {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+@media(max-width:420px){ .fee-structure{ grid-template-columns:1fr; } }
+
+.fee-item {
+  background:var(--cream);
+  border-radius:12px;
+  padding:18px 16px;
+  border-left:3px solid var(--rose-lt);
+}
+.fee-item-title {
+  font-family:'Noto Serif JP',serif;
+  font-size:13px; color:var(--ink);
+  margin-bottom:4px;
+}
+.fee-item-sub {
+  font-size:11px; color:var(--ink-mid); line-height:1.8;
+}
+
+/* ══ プランカード ══ */
+.plans-sec {
+  padding:72px 24px;
+  background:
+    radial-gradient(ellipse at 85% 10%,rgba(200,120,140,.08),transparent 50%),
+    var(--cream);
+}
+.plans-inner { max-width:660px; margin:0 auto; }
+
+/* タブ */
+.plan-tabs {
+  display:flex; gap:8px; margin-bottom:24px;
+  overflow-x:auto; padding-bottom:4px;
+  scrollbar-width:none;
+}
+.plan-tabs::-webkit-scrollbar { display:none; }
+.plan-tab {
+  flex-shrink:0;
+  background:var(--white);
+  border:1.5px solid rgba(200,160,170,.3);
+  border-radius:50px;
+  padding:9px 18px;
+  font-size:12px; letter-spacing:.1em;
+  color:var(--ink-mid);
+  cursor:pointer;
+  transition:all .2s;
+  font-family:'Noto Serif JP',serif;
+  white-space:nowrap;
+}
+.plan-tab:hover { border-color:var(--rose-lt); color:var(--rose); }
+.plan-tab.active {
+  background:var(--rose);
+  border-color:var(--rose);
+  color:var(--white);
+  box-shadow:0 4px 16px rgba(200,64,90,.3);
+}
+
+/* プランカード */
+.plan-card {
+  display:none;
+  background:var(--white);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 8px 40px rgba(180,80,100,.10), 0 2px 8px rgba(0,0,0,.04);
+  border:1px solid rgba(200,160,170,.15);
+  animation:fadeUp .4s ease forwards;
+}
+.plan-card.active { display:block; }
+
+.plan-card-header {
+  padding:32px 28px 24px;
+  position:relative; overflow:hidden;
+}
+.plan-card-header::before {
+  content:''; position:absolute;
+  inset:0; opacity:.92;
+}
+.plan-card-header.ume   { background:linear-gradient(135deg,#fdf0f4,#f5d8e4); }
+.plan-card-header.take  { background:linear-gradient(135deg,#fdf0f4,#f0c8d8); }
+.plan-card-header.matsu { background:linear-gradient(135deg,#f5f0fa,#e8d8f0); }
+.plan-card-header.free  { background:linear-gradient(135deg,#fdf8f0,#f0e8d0); }
+
+.plan-badge {
+  display:inline-block;
+  font-size:9px; letter-spacing:.4em;
+  padding:4px 12px; border-radius:20px;
+  margin-bottom:12px;
+  color:white;
+}
+.badge-ume   { background:var(--ume); }
+.badge-take  { background:var(--take); }
+.badge-matsu { background:var(--matsu); }
+.badge-free  { background:var(--free); }
+
+.plan-rec {
+  position:absolute; top:20px; right:20px;
+  background:var(--rose);
+  color:white; font-size:9px; letter-spacing:.25em;
+  padding:4px 10px; border-radius:4px;
+}
+
+.plan-name {
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(20px,5vw,26px);
+  font-weight:500; line-height:1.4;
+  margin-bottom:4px;
+}
+.plan-name-en {
+  font-size:10px; letter-spacing:.35em; opacity:.5;
+  margin-bottom:10px;
+}
+.plan-catch {
+  font-size:12px; color:var(--ink-mid); line-height:1.8;
+}
+
+/* 料金グリッド */
+.plan-fees {
+  padding:24px 28px;
+  border-bottom:1px solid rgba(200,160,170,.12);
+}
+.plan-fees-title {
+  font-size:9px; letter-spacing:.4em; color:var(--gold);
+  margin-bottom:14px;
+}
+.fee-row {
+  display:flex; justify-content:space-between;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px dashed rgba(200,160,170,.2);
+  font-size:13px;
+}
+.fee-row:last-child { border-bottom:none; }
+.fee-name { color:var(--ink-mid); }
+.fee-amount {
+  font-family:'Noto Serif JP',serif;
+  font-size:15px; color:var(--ink);
+  font-weight:500; letter-spacing:.05em;
+}
+.fee-amount.free-badge {
+  background:var(--blush);
+  color:var(--rose);
+  font-size:12px;
+  padding:2px 10px; border-radius:20px;
+  font-family:'Noto Sans JP',sans-serif;
+}
+.fee-amount small {
+  font-size:10px; color:var(--ink-mid);
+  font-weight:300; margin-left:2px;
+  font-family:'Noto Sans JP',sans-serif;
+}
+
+/* 特徴 */
+.plan-features {
+  padding:20px 28px 24px;
+  border-bottom:1px solid rgba(200,160,170,.12);
+}
+.plan-features-title {
+  font-size:9px; letter-spacing:.4em; color:var(--gold);
+  margin-bottom:12px;
+}
+.feature-list {
+  list-style:none; display:flex; flex-direction:column; gap:8px;
+}
+.feature-list li {
+  font-size:13px; color:var(--ink-mid);
+  display:flex; align-items:center; gap:10px; line-height:1.6;
+}
+.feature-list li .check {
+  width:20px;height:20px;border-radius:50%;
+  background:var(--rose);color:white;
+  font-size:9px; flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.feature-list li.highlight { color:var(--rose); font-weight:500; }
+
+/* オプション小見出し */
+.plan-option-hint {
+  padding:16px 28px 24px;
+}
+.plan-option-hint p {
+  font-size:11.5px; color:var(--ink-mid); line-height:1.9;
+}
+.plan-option-hint a {
+  color:var(--rose); text-decoration:underline;
+  text-underline-offset:3px;
+}
+
+/* ══ 料金内訳モーダル風 ══ */
+.breakdown-sec {
+  padding:64px 24px;
+  background:var(--white);
+}
+.breakdown-inner { max-width:640px; margin:0 auto; }
+
+.breakdown-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-top:36px;
+}
+@media(max-width:460px){ .breakdown-grid{ grid-template-columns:1fr; } }
+
+.breakdown-card {
+  background:var(--cream);
+  border-radius:16px;
+  padding:22px 20px;
+  border:1px solid rgba(200,160,170,.15);
+  box-shadow:0 2px 12px rgba(0,0,0,.04);
+  position:relative; overflow:hidden;
+}
+.breakdown-card::before {
+  content:''; position:absolute;
+  top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--rose),var(--mauve),var(--gold));
+}
+.breakdown-card-icon { font-size:24px; margin-bottom:10px; }
+.breakdown-card-title {
+  font-family:'Noto Serif JP',serif;
+  font-size:14px; color:var(--ink); margin-bottom:4px;
+}
+.breakdown-card-label {
+  font-size:9px; letter-spacing:.35em; color:var(--gold);
+  margin-bottom:10px;
+}
+.breakdown-list {
+  list-style:none; display:flex; flex-direction:column; gap:5px;
+}
+.breakdown-list li {
+  font-size:11px; color:var(--ink-mid);
+  display:flex; align-items:center; gap:6px; line-height:1.6;
+}
+.breakdown-list li::before {
+  content:''; width:4px;height:4px;
+  border-radius:50%; background:var(--rose-lt); flex-shrink:0;
+}
+
+/* ══ オプション ══ */
+.options-sec {
+  padding:72px 24px;
+  background:
+    radial-gradient(ellipse at 15% 50%,rgba(200,120,140,.08),transparent 55%),
+    var(--cream-dk);
+}
+.options-inner { max-width:660px; margin:0 auto; }
+
+.option-category {
+  margin-bottom:28px;
+}
+.option-cat-title {
+  font-family:'Noto Serif JP',serif;
+  font-size:14px; color:var(--ink);
+  margin-bottom:12px;
+  display:flex; align-items:center; gap:10px;
+}
+.option-cat-title::after {
+  content:''; flex:1; height:.5px;
+  background:linear-gradient(90deg,rgba(192,144,80,.4),transparent);
+}
+.option-list {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+@media(max-width:420px){ .option-list{ grid-template-columns:1fr; } }
+
+.option-item {
+  background:var(--white);
+  border-radius:10px;
+  padding:12px 14px;
+  display:flex; justify-content:space-between; align-items:center;
+  border:1px solid rgba(200,160,170,.15);
+  font-size:12.5px;
+}
+.option-item-name { color:var(--ink-mid); line-height:1.5; }
+.option-item-price {
+  font-family:'Noto Serif JP',serif;
+  font-size:13px; color:var(--rose);
+  white-space:nowrap; margin-left:8px; flex-shrink:0;
+}
+
+/* ══ 成婚後サポート ══ */
+.after-sec {
+  padding:72px 24px;
+  background:var(--ink);
+  position:relative; overflow:hidden;
+}
+.after-sec::before {
+  content:'凛'; position:absolute;
+  font-family:'Noto Serif JP',serif;
+  font-size:260px; font-weight:700;
+  color:rgba(255,255,255,.025);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.after-inner { max-width:600px; margin:0 auto; text-align:center; }
+.after-inner .sec-eyebrow { color:var(--gold-lt); }
+.after-inner .sec-title   { color:var(--white); }
+.after-inner .sec-lead    { color:rgba(255,255,255,.55); }
+.after-inner .ol          { background:linear-gradient(90deg,transparent,rgba(232,208,144,.5)); }
+.after-inner .ol.r        { background:linear-gradient(90deg,rgba(232,208,144,.5),transparent); }
+.after-inner .od          { background:var(--gold-lt); }
+
+.after-catch {
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(16px,4vw,20px);
+  color:var(--white); line-height:2;
+  margin-bottom:12px;
+}
+.after-catch em { font-style:normal; color:var(--gold-lt); }
+
+.after-tags {
+  display:flex; flex-wrap:wrap; gap:8px;
+  justify-content:center; margin:28px 0;
+}
+.after-tag {
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  padding:7px 14px;
+  font-size:12px; color:rgba(255,255,255,.75);
+  letter-spacing:.08em;
+}
+
+/* ══ 比較表 ══ */
+.compare-sec {
+  padding:72px 24px;
+  background:var(--white);
+}
+.compare-inner { max-width:660px; margin:0 auto; }
+
+.compare-table {
+  width:100%; border-collapse:collapse;
+  margin-top:32px; font-size:12px;
+}
+.compare-table th {
+  background:var(--rose);
+  color:white; padding:12px 8px;
+  font-family:'Noto Serif JP',serif;
+  font-weight:400; letter-spacing:.1em;
+  text-align:center;
+}
+.compare-table th:first-child {
+  background:var(--ink);
+  text-align:left; padding-left:14px;
+}
+.compare-table th.ume-h   { background:var(--ume); }
+.compare-table th.matsu-h { background:var(--matsu); }
+.compare-table th.free-h  { background:var(--free); }
+
+.compare-table td {
+  padding:11px 8px; text-align:center;
+  border-bottom:1px solid rgba(200,160,170,.15);
+  color:var(--ink-mid);
+}
+.compare-table td:first-child {
+  text-align:left; padding-left:14px;
+  color:var(--ink); font-size:12px;
+}
+.compare-table tr:nth-child(even) td { background:var(--blush-lt); }
+.compare-table .rec-col { background:rgba(200,64,90,.04) !important; }
+.check-o { color:var(--rose); font-size:16px; }
+.check-x { color:#d0c0c8; font-size:14px; }
+.check-d { color:var(--gold); font-size:12px; }
+
+/* ══ CTA ══ */
+.cta-sec {
+  padding:72px 24px 80px;
+  text-align:center;
+  background:
+    radial-gradient(ellipse at 30% 50%,rgba(200,120,140,.12),transparent 55%),
+    var(--cream);
+}
+.cta-inner { max-width:520px; margin:0 auto; }
+
+.cta-card {
+  background:var(--white);
+  border-radius:22px; padding:40px 28px;
+  box-shadow:0 16px 56px rgba(200,80,100,.10),0 4px 16px rgba(0,0,0,.04);
+  border:1px solid rgba(200,160,170,.18);
+  position:relative; overflow:hidden;
+  margin-bottom:16px;
+}
+.cta-card::before {
+  content:''; position:absolute;
+  top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--rose),var(--mauve),var(--gold));
+}
+.cta-badge {
+  display:inline-block;
+  background:linear-gradient(135deg,var(--rose),#d86080);
+  color:white; font-size:10px; letter-spacing:.3em;
+  padding:5px 16px; border-radius:20px; margin-bottom:16px;
+}
+.cta-title {
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(16px,4.5vw,21px);
+  line-height:1.7; margin-bottom:10px;
+}
+.cta-title em { font-style:normal; color:var(--rose); }
+.cta-sub {
+  font-size:12px; color:var(--ink-mid);
+  line-height:2; margin-bottom:28px;
+}
+
+.cta-btn {
+  display:block; width:100%;
+  background:linear-gradient(135deg,#c8405a 0%,#d86080 50%,#c8405a 100%);
+  background-size:200% auto;
+  color:white; border:none; text-decoration:none;
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(14px,4vw,17px);
+  letter-spacing:.15em; padding:19px 24px;
+  border-radius:50px; cursor:pointer;
+  position:relative; overflow:hidden;
+  box-shadow:0 8px 28px rgba(200,64,90,.35);
+  transition:transform .2s, box-shadow .3s;
+  animation:shimmer 3s linear infinite;
+}
+.cta-btn:hover {
+  transform:translateY(-2px);
+  box-shadow:0 12px 36px rgba(200,64,90,.45);
+}
+.cta-btn-pulse {
+  position:absolute; inset:0; border-radius:50px;
+  border:2px solid rgba(200,64,90,.4);
+  animation:pulse-ring 2s ease-out infinite;
+  pointer-events:none;
+}
+.cta-btn-sub {
+  font-size:10px; opacity:.85;
+  display:block; letter-spacing:.2em; margin-top:4px;
+}
+.cta-note {
+  font-size:10.5px; color:#b0a098;
+  margin-top:14px; line-height:1.9;
+}
+
+footer {
+  background:#1a1010; padding:28px 24px; text-align:center;
+}
+footer p {
+  font-size:10px; letter-spacing:.35em;
+  color:rgba(255,255,255,.18);
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-logo">結び処 <span>凛</span></div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-circle hc1"></div>
+  <div class="hero-circle hc2"></div>
+  <div class="hero-logo">
+    <svg viewBox="0 0 80 80" fill="none">
+      <defs>
+        <radialGradient id="hg" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#f0c8d8" stop-opacity=".9"/>
+          <stop offset="50%" stop-color="#d090b0" stop-opacity=".7"/>
+          <stop offset="100%" stop-color="#9060a0" stop-opacity=".4"/>
+        </radialGradient>
+      </defs>
+      <circle cx="40" cy="40" r="38" fill="url(#hg)"/>
+      <circle cx="40" cy="40" r="38" stroke="rgba(192,144,80,.3)" stroke-width=".7"/>
+      <text x="40" y="52" text-anchor="middle"
+        font-family="Noto Serif JP,serif" font-size="28" font-weight="400"
+        fill="rgba(42,24,32,.85)">凛</text>
+    </svg>
+  </div>
+  <p class="hero-eyebrow">PLAN &amp; PRICE</p>
+  <h1 class="hero-title"><em>プラン・料金</em></h1>
+  <p class="hero-sub">
+    あなたのペースで、無理なく始められる。<br>
+    4つのプランからお選びいただけます。
+  </p>
+  <div class="ornament">
+    <div class="ol"></div><div class="od"></div><div class="ol r"></div>
+  </div>
+</section>
+
+<!-- 料金の考え方 -->
+<section class="concept-sec">
+  <div class="concept-inner">
+    <p class="sec-eyebrow reveal">料金について</p>
+    <h2 class="sec-title reveal">すべての料金には<br><em>意味があります</em></h2>
+    <div class="ornament reveal">
+      <div class="ol"></div><div class="od"></div><div class="ol r"></div>
+    </div>
+
+    <div class="concept-box reveal">
+      <p>「成婚率〇〇%」より<br>「あなたの幸せ」を大切にします。</p>
+      <small style="display:block;margin-top:10px">
+        結び処 凛の料金は、単なるサービス料ではありません。<br>
+        あなたの婚活を丁寧に伴走するための費用です。
+      </small>
+    </div>
+
+    <div class="fee-structure reveal">
+      <div class="fee-item">
+        <div class="fee-item-title">📋 入会金</div>
+        <div class="fee-item-sub">初回カウンセリング・個性心理學診断・活動設計</div>
+      </div>
+      <div class="fee-item">
+        <div class="fee-item-title">📸 登録料</div>
+        <div class="fee-item-sub">プロフィール作成・自己PR添削・写真選定サポート</div>
+      </div>
+      <div class="fee-item">
+        <div class="fee-item-title">💬 月会費</div>
+        <div class="fee-item-sub">LINE相談・お相手紹介・活動分析・見合い調整</div>
+      </div>
+      <div class="fee-item">
+        <div class="fee-item-title">🌸 成婚料</div>
+        <div class="fee-item-sub">真剣交際〜ご成婚・成婚後サポート・専門家紹介</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- プランカード -->
+<section class="plans-sec">
+  <div class="plans-inner">
+    <p class="sec-eyebrow reveal">4つのプラン</p>
+    <h2 class="sec-title reveal">あなたに合った<em>プラン</em>を<br>選んでください</h2>
+    <p class="sec-lead reveal">タップして各プランの詳細を確認できます</p>
+
+    <!-- タブ -->
+    <div class="plan-tabs reveal">
+      <button class="plan-tab active" onclick="switchPlan('ume',this)">🌸 梅プラン</button>
+      <button class="plan-tab" onclick="switchPlan('take',this)">🎋 竹プラン</button>
+      <button class="plan-tab" onclick="switchPlan('matsu',this)">🌲 松プラン</button>
+      <button class="plan-tab" onclick="switchPlan('free',this)">✦ オーダーメイド</button>
+    </div>
+
+    <!-- 梅 -->
+    <div class="plan-card active" id="plan-ume">
+      <div class="plan-card-header ume">
+        <span class="plan-badge badge-ume">PLAN 01</span>
+        <div class="plan-name">🌸 梅｜ご縁スタートプラン</div>
+        <div class="plan-name-en">UME — START PLAN</div>
+        <p class="plan-catch">まず婚活を始めたい方へ。<br>低負担でスタートできる入門プランです。</p>
+      </div>
+      <div class="plan-fees">
+        <div class="plan-fees-title">PRICE</div>
+        <div class="fee-row">
+          <span class="fee-name">入会金</span>
+          <span class="fee-amount">33,000<small>円</small></span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">登録料</span>
+          <span class="fee-amount">22,000<small>円</small></span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">月会費</span>
+          <span class="fee-amount">9,800<small>円／月</small></span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">お見合い料</span>
+          <span class="fee-amount">5,500<small>円／回</small></span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">成婚料</span>
+          <span class="fee-amount">220,000<small>円</small></span>
+        </div>
+      </div>
+      <div class="plan-features">
+        <div class="plan-features-title">FEATURES</div>
+        <ul class="feature-list">
+          <li><span class="check">✓</span>婚活初心者の方に最適</li>
+          <li><span class="check">✓</span>低負担で無理なくスタート</li>
+          <li><span class="check">✓</span>初回カウンセリング・個性心理學簡易分析つき</li>
+          <li><span class="check">✓</span>LINE相談・お相手紹介・活動サポート</li>
+          <li><span class="check">✓</span>必要に応じてオプション追加可能</li>
+        </ul>
+      </div>
+      <div class="plan-option-hint">
+        <p>恋愛コンサル・個性心理學詳細分析などは<a href="#options">オプション</a>から追加できます。</p>
+      </div>
+    </div>
+
+    <!-- 竹 -->
+    <div class="plan-card" id="plan-take">
+      <div class="plan-card-header take">
+        <span class="plan-badge badge-take">PLAN 02</span>
+        <div class="plan-rec">✦ 一番人気</div>
+        <div class="plan-name">🎋 竹｜ご縁サポートプラン</div>
+        <div class="plan-name-en">TAKE — SUPPORT PLAN</div>
+        <p class="plan-catch">安心して相談しながら進めたい方へ。<br>結び処 凛が最もおすすめするプランです。</p>
+      </div>
+      <div class="plan-fees">
+        <div class="plan-fees-title">PRICE</div>
+        <div class="fee-row">
+          <span class="fee-name">入会金</span>
+          <span class="fee-amount">55,000<small>円</small></span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">登録料</span>
+          <span class="fee-amount">33,000<small>円</small></span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">月会費</span>
+          <span class="fee-amount">16,800<small>円／月</small></span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">お見合い料</span>
+          <span class="fee-amount free-badge">無料</span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">成婚料</span>
+          <span class="fee-amount">220,000<small>円</small></span>
+        </div>
+      </div>
+      <div class="plan-features">
+        <div class="plan-features-title">FEATURES</div>
+        <ul class="feature-list">
+          <li class="highlight"><span class="check">✓</span>お見合い料が完全無料で活動しやすい</li>
+          <li><span class="check">✓</span>一人で頑張らない、寄り添い型のサポート</li>
+          <li><span class="check">✓</span>カウンセラーへのLINE相談いつでも可能</li>
+          <li><span class="check">✓</span>初回カウンセリング・個性心理學簡易分析つき</li>
+          <li><span class="check">✓</span>活動状況の定期振り返り面談あり</li>
+        </ul>
+      </div>
+      <div class="plan-option-hint">
+        <p>恋愛コンサル連携・個性心理學詳細分析は<a href="#options">オプション</a>から追加できます。</p>
+      </div>
+    </div>
+
+    <!-- 松 -->
+    <div class="plan-card" id="plan-matsu">
+      <div class="plan-card-header matsu">
+        <span class="plan-badge badge-matsu">PLAN 03</span>
+        <div class="plan-name">🌲 松｜ご成婚伴走プラン</div>
+        <div class="plan-name-en">MATSU — PREMIUM PLAN</div>
+        <p class="plan-catch">本気で人生を変えたい方へ。<br>恋愛力から磨く、完全伴走型プランです。</p>
+      </div>
+      <div class="plan-fees">
+        <div class="plan-fees-title">PRICE</div>
+        <div class="fee-row">
+          <span class="fee-name">入会金</span>
+          <span class="fee-amount">88,000<small>円</small></span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">登録料</span>
+          <span class="fee-amount">33,000<small>円</small></span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">月会費</span>
+          <span class="fee-amount">29,800<small>円／月</small></span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">お見合い料</span>
+          <span class="fee-amount free-badge">無料</span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">成婚料</span>
+          <span class="fee-amount">220,000<small>円</small></span>
+        </div>
+      </div>
+      <div class="plan-features">
+        <div class="plan-features-title">FEATURES</div>
+        <ul class="feature-list">
+          <li class="highlight"><span class="check">✓</span>提携恋愛コンサルタントとの連携サポート</li>
+          <li class="highlight"><span class="check">✓</span>個性心理學による深層自己分析・相性分析</li>
+          <li><span class="check">✓</span>お見合い料完全無料</li>
+          <li><span class="check">✓</span>LINEサポート・恋愛力強化プログラム</li>
+          <li><span class="check">✓</span>仮交際〜本交際まで徹底伴走</li>
+          <li><span class="check">✓</span>「選ばれる力」を育てるトータルサポート</li>
+        </ul>
+      </div>
+      <div class="plan-option-hint">
+        <p>より深い個性心理學鑑定や追加コンサル面談は<a href="#options">オプション</a>からご追加いただけます。</p>
+      </div>
+    </div>
+
+    <!-- オーダーメイド -->
+    <div class="plan-card" id="plan-free">
+      <div class="plan-card-header free">
+        <span class="plan-badge badge-free">PLAN 04</span>
+        <div class="plan-name">✦ 凛オーダーメイドプラン</div>
+        <div class="plan-name-en">RIN — CUSTOM PLAN</div>
+        <p class="plan-catch">自分に合う婚活を自由に組み立てたい方へ。<br>必要なサポートだけを選べる自由設計型です。</p>
+      </div>
+      <div class="plan-fees">
+        <div class="plan-fees-title">BASE PRICE</div>
+        <div class="fee-row">
+          <span class="fee-name">入会金</span>
+          <span class="fee-amount">22,000<small>円</small></span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">登録料</span>
+          <span class="fee-amount">22,000<small>円</small></span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">月会費</span>
+          <span class="fee-amount">5,500<small>円〜</small></span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">お見合い料</span>
+          <span class="fee-amount free-badge">オプション</span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-name">成婚料</span>
+          <span class="fee-amount">220,000<small>円</small></span>
+        </div>
+      </div>
+      <div class="plan-features">
+        <div class="plan-features-title">FEATURES</div>
+        <ul class="feature-list">
+          <li><span class="check">✓</span>必要なサポートだけを選んで組み合わせ可能</li>
+          <li><span class="check">✓</span>自分のペース・予算に合わせて自由設計</li>
+          <li><span class="check">✓</span>カウンセラーと相談しながらプランを構築</li>
+          <li><span class="check">✓</span>再婚層・お忙しい方にも対応</li>
+          <li><span class="check">✓</span>オプションを自由に組み合わせ</li>
+        </ul>
+      </div>
+      <div class="plan-option-hint">
+        <p>詳しい内容はカウンセラーとご相談ください。<a href="#options">オプション一覧</a>も参考にどうぞ。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 料金内訳 -->
+<section class="breakdown-sec" id="breakdown">
+  <div class="breakdown-inner">
+    <p class="sec-eyebrow reveal">各料金の内訳</p>
+    <h2 class="sec-title reveal">料金に<em>含まれること</em></h2>
+    <div class="ornament reveal">
+      <div class="ol"></div><div class="od"></div><div class="ol r"></div>
+    </div>
+
+    <div class="breakdown-grid">
+      <div class="breakdown-card reveal">
+        <div class="breakdown-card-icon">📋</div>
+        <div class="breakdown-card-label">ADMISSION FEE</div>
+        <div class="breakdown-card-title">入会金に含まれること</div>
+        <ul class="breakdown-list">
+          <li>初回カウンセリング</li>
+          <li>活動設計・目標設定</li>
+          <li>個性心理學簡易分析</li>
+          <li>婚活方向性の整理</li>
+        </ul>
+      </div>
+      <div class="breakdown-card reveal">
+        <div class="breakdown-card-icon">📸</div>
+        <div class="breakdown-card-label">REGISTRATION FEE</div>
+        <div class="breakdown-card-title">登録料に含まれること</div>
+        <ul class="breakdown-list">
+          <li>システム登録</li>
+          <li>プロフィール作成・添削</li>
+          <li>自己PR添削</li>
+          <li>写真スタジオ選定・写真選定</li>
+          <li>活動準備サポート</li>
+        </ul>
+      </div>
+      <div class="breakdown-card reveal">
+        <div class="breakdown-card-icon">💬</div>
+        <div class="breakdown-card-label">MONTHLY FEE</div>
+        <div class="breakdown-card-title">月会費に含まれること</div>
+        <ul class="breakdown-list">
+          <li>システム利用</li>
+          <li>LINE相談いつでも可能</li>
+          <li>お相手のご紹介</li>
+          <li>活動分析・振り返り</li>
+          <li>お見合い調整（※プランによる）</li>
+        </ul>
+      </div>
+      <div class="breakdown-card reveal">
+        <div class="breakdown-card-icon">🌸</div>
+        <div class="breakdown-card-label">SUCCESS FEE</div>
+        <div class="breakdown-card-title">成婚料に含まれること</div>
+        <ul class="breakdown-list">
+          <li>真剣交際サポート</li>
+          <li>プロポーズ・ご両家相談</li>
+          <li>成婚面談・成婚後サポート</li>
+          <li>提携専門家のご紹介</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- オプション -->
+<section class="options-sec" id="options">
+  <div class="options-inner">
+    <p class="sec-eyebrow reveal">オプション</p>
+    <h2 class="sec-title reveal">必要なサポートを<br><em>自由に追加</em>できます</h2>
+    <p class="sec-lead reveal">どのプランでも、オプションを組み合わせてカスタマイズ可能です。</p>
+
+    <div class="option-category reveal">
+      <div class="option-cat-title">🔮 個性心理學</div>
+      <div class="option-list">
+        <div class="option-item"><span class="option-item-name">詳細診断</span><span class="option-item-price">11,000円</span></div>
+        <div class="option-item"><span class="option-item-name">相性診断</span><span class="option-item-price">8,800円</span></div>
+        <div class="option-item"><span class="option-item-name">恋愛傾向分析</span><span class="option-item-price">5,500円</span></div>
+        <div class="option-item"><span class="option-item-name">結婚後相性分析</span><span class="option-item-price">11,000円</span></div>
+        <div class="option-item"><span class="option-item-name">親子関係分析</span><span class="option-item-price">8,800円</span></div>
+      </div>
+    </div>
+
+    <div class="option-category reveal">
+      <div class="option-cat-title">💌 恋愛サポート</div>
+      <div class="option-list">
+        <div class="option-item"><span class="option-item-name">LINE添削</span><span class="option-item-price">3,300円</span></div>
+        <div class="option-item"><span class="option-item-name">デート相談</span><span class="option-item-price">5,500円</span></div>
+        <div class="option-item"><span class="option-item-name">恋愛コンサル面談</span><span class="option-item-price">11,000円</span></div>
+        <div class="option-item"><span class="option-item-name">仮交際サポート</span><span class="option-item-price">8,800円</span></div>
+        <div class="option-item"><span class="option-item-name">真剣交際サポート</span><span class="option-item-price">11,000円</span></div>
+      </div>
+    </div>
+
+    <div class="option-category reveal">
+      <div class="option-cat-title">✨ プロフィール強化</div>
+      <div class="option-list">
+        <div class="option-item"><span class="option-item-name">プロフィール添削</span><span class="option-item-price">5,500円</span></div>
+        <div class="option-item"><span class="option-item-name">自己PR作成</span><span class="option-item-price">8,800円</span></div>
+        <div class="option-item"><span class="option-item-name">写真選定サポート</span><span class="option-item-price">5,500円</span></div>
+        <div class="option-item"><span class="option-item-name">写真撮影同行</span><span class="option-item-price">11,000円</span></div>
+        <div class="option-item"><span class="option-item-name">ファッション相談</span><span class="option-item-price">8,800円</span></div>
+      </div>
+    </div>
+
+    <div class="option-category reveal">
+      <div class="option-cat-title">👥 コミュニケーション</div>
+      <div class="option-list">
+        <div class="option-item"><span class="option-item-name">会話練習</span><span class="option-item-price">5,500円</span></div>
+        <div class="option-item"><span class="option-item-name">お見合い模擬練習</span><span class="option-item-price">8,800円</span></div>
+        <div class="option-item"><span class="option-item-name">男性心理講座</span><span class="option-item-price">5,500円</span></div>
+        <div class="option-item"><span class="option-item-name">女性心理講座</span><span class="option-item-price">5,500円</span></div>
+      </div>
+    </div>
+
+    <div class="option-category reveal">
+      <div class="option-cat-title">🏡 再婚サポート</div>
+      <div class="option-list">
+        <div class="option-item"><span class="option-item-name">再婚相談</span><span class="option-item-price">8,800円</span></div>
+        <div class="option-item"><span class="option-item-name">子連れ婚活相談</span><span class="option-item-price">11,000円</span></div>
+        <div class="option-item"><span class="option-item-name">再婚不安サポート</span><span class="option-item-price">5,500円</span></div>
+      </div>
+    </div>
+
+    <p style="font-size:11px;color:#b0a098;text-align:center;margin-top:20px;line-height:1.9">
+      ※ 表示価格はすべて税込です<br>
+      ※ オプションはいつでも追加可能です
+    </p>
+  </div>
+</section>
+
+<!-- 成婚後サポート -->
+<section class="after-sec">
+  <div class="after-inner">
+    <p class="sec-eyebrow reveal">成婚後も続くサポート</p>
+    <h2 class="sec-title reveal">ご成婚は、<br><em>新しい人生の始まり</em></h2>
+    <div class="ornament reveal">
+      <div class="ol"></div><div class="od"></div><div class="ol r"></div>
+    </div>
+    <p class="after-catch reveal">
+      普通の相談所は「成婚退会」で終わり。<br>
+      結び処 凛は、<em>その先まで一緒に歩みます。</em>
+    </p>
+    <p class="sec-lead reveal" style="margin-bottom:0">
+      提携のプロフェッショナル業者と連携し、<br>
+      新生活に必要なことを丸ごとサポートします。
+    </p>
+    <div class="after-tags reveal">
+      <span class="after-tag">💰 FP・ライフプラン相談</span>
+      <span class="after-tag">🏥 保険相談</span>
+      <span class="after-tag">🏠 住まい相談</span>
+      <span class="after-tag">🚚 引越し業者紹介</span>
+      <span class="after-tag">💒 ブライダル紹介</span>
+      <span class="after-tag">💐 プロポーズ花屋</span>
+      <span class="after-tag">💍 ジュエリーショップ</span>
+      <span class="after-tag">👔 オーダースーツ</span>
+      <span class="after-tag">💄 美容サポート</span>
+      <span class="after-tag">📸 結婚式場紹介</span>
+    </div>
+  </div>
+</section>
+
+<!-- 比較表 -->
+<section class="compare-sec">
+  <div class="compare-inner">
+    <p class="sec-eyebrow reveal">プラン比較</p>
+    <h2 class="sec-title reveal"><em>4つのプラン</em>を比較する</h2>
+    <div class="ornament reveal">
+      <div class="ol"></div><div class="od"></div><div class="ol r"></div>
+    </div>
+    <div style="overflow-x:auto" class="reveal">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="ume-h">🌸 梅</th>
+            <th>🎋 竹</th>
+            <th class="matsu-h">🌲 松</th>
+            <th class="free-h">✦ OM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>入会金</td>
+            <td>33,000円</td>
+            <td class="rec-col">55,000円</td>
+            <td>88,000円</td>
+            <td>22,000円</td>
+          </tr>
+          <tr>
+            <td>月会費</td>
+            <td>9,800円</td>
+            <td class="rec-col">16,800円</td>
+            <td>29,800円</td>
+            <td>5,500円〜</td>
+          </tr>
+          <tr>
+            <td>お見合い料</td>
+            <td>5,500円</td>
+            <td class="rec-col"><span class="check-o">●</span> 無料</td>
+            <td><span class="check-o">●</span> 無料</td>
+            <td><span class="check-d">option</span></td>
+          </tr>
+          <tr>
+            <td>個性心理學（簡易）</td>
+            <td><span class="check-o">●</span></td>
+            <td class="rec-col"><span class="check-o">●</span></td>
+            <td><span class="check-o">●</span></td>
+            <td><span class="check-d">option</span></td>
+          </tr>
+          <tr>
+            <td>恋愛コンサル連携</td>
+            <td><span class="check-d">option</span></td>
+            <td class="rec-col"><span class="check-d">option</span></td>
+            <td><span class="check-o">●</span></td>
+            <td><span class="check-d">option</span></td>
+          </tr>
+          <tr>
+            <td>LINE相談</td>
+            <td><span class="check-o">●</span></td>
+            <td class="rec-col"><span class="check-o">●</span></td>
+            <td><span class="check-o">●</span></td>
+            <td><span class="check-d">option</span></td>
+          </tr>
+          <tr>
+            <td>成婚後サポート</td>
+            <td><span class="check-o">●</span></td>
+            <td class="rec-col"><span class="check-o">●</span></td>
+            <td><span class="check-o">●</span></td>
+            <td><span class="check-o">●</span></td>
+          </tr>
+          <tr>
+            <td>こんな方に</td>
+            <td style="font-size:11px">初心者・低予算スタート</td>
+            <td class="rec-col" style="font-size:11px">安心・寄り添い重視</td>
+            <td style="font-size:11px">本気・徹底サポート希望</td>
+            <td style="font-size:11px">自由設計・再婚層</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:10px;color:#b0a098;text-align:center;margin-top:12px">
+      OM = オーダーメイドプラン　● = 含む　option = オプション追加で利用可
+    </p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="cta-inner">
+    <p class="sec-eyebrow reveal">まずはご相談ください</p>
+    <h2 class="sec-title reveal">どのプランか<em>迷ったら</em><br>無料相談へ</h2>
+    <div class="ornament reveal">
+      <div class="ol"></div><div class="od"></div><div class="ol r"></div>
+    </div>
+
+    <div class="cta-card reveal">
+      <div class="cta-badge">✦ 完全無料 ✦</div>
+      <h3 class="cta-title">
+        あなたに合ったプランを<br>
+        <em>カウンセラーと一緒に</em>選べます
+      </h3>
+      <p class="cta-sub">
+        料金のこと、サポート内容のこと、<br>
+        どんなことでもお気軽にご相談ください。<br>
+        入会のご判断は、ご自身のペースで大丈夫です。
+      </p>
+      <a href="https://lin.ee/rnFfv4A" class="cta-btn" target="_blank">
+        <div class="cta-btn-pulse"></div>
+        LINEで無料相談する
+        <span class="cta-btn-sub">— 友だち追加はこちら —</span>
+      </a>
+      <p class="cta-note">
+        ※ 無理な勧誘は一切ありません<br>
+        ※ 相談だけでも大歓迎です
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 結び処 凛 MUSUBIDOKORO RIN — All Rights Reserved.</p>
+</footer>
+
+<script>
+// プランタブ切替
+function switchPlan(id, tab) {
+  document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.plan-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('plan-' + id).classList.add('active');
+  tab.classList.add('active');
+}
+
+// スクロールアニメーション
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
